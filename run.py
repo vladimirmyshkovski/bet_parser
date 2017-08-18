@@ -8,12 +8,12 @@ import os
 import time
 
 
-url = "http://w2.kkkk99.net/"
-login_url = "?r=1"
-main_url = "main.php"
+url = ""
+login_url = ""
+main_url = ""
 
-username = "x660s1573"
-password = "aa123456"
+username = ""
+password = ""
 
 browser = webdriver.Firefox()#PhantomJS()
 
@@ -22,8 +22,6 @@ def login():
 
 	browser.get(url + login_url)
 	
-	#button = browser.find_element_by_xpath('//button[@id="signin-submit"]') 
-
 	button = WebDriverWait(browser, 100).until(
 		EC.presence_of_element_located((By.XPATH, "//button[@id='signin-submit']"))
 	)
@@ -69,7 +67,7 @@ def wait_table():
 		EC.presence_of_element_located((By.XPATH, "//frameset"))
 	)
 	
-	browser.get('http://49297922.w2.kkkk99.net/index.php/content/hdp/2')
+	browser.get('')
 
 	table_container = WebDriverWait(browser, 1000).until(
 		EC.presence_of_element_located((By.XPATH, "//div[@id='mTableContainer']"))
