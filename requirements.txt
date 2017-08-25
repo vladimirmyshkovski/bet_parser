@@ -8,7 +8,11 @@ olefile==0.44
 requests==2.18.3
 selenium==3.5.0
 urllib3==1.22
+<<<<<<< HEAD
 pytz
 pony
 pymysql
 daemonize
+=======
+pytz
+>>>>>>> 5a6ed1a691c56c5ffc58f45a7d837588e0734e16
