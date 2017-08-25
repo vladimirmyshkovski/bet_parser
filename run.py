@@ -6,14 +6,13 @@ from bs4 import BeautifulSoup
 import datetime 
 import os 
 import time
-<<<<<<< HEAD
 import pytz
 from pony.orm import *
 from daemonize import Daemonize
 
 
 db = Database()
-db.bind(provider='mysql', host='127.0.0.1', port=3306, user='root', passwd='iddqd3133122', db='narnik')
+db.bind(provider='mysql', host='127.0.0.1', port=3306, user='root', passwd='', db='narnik')
 
 class Bettingoffer(db.Entity):
 	id = PrimaryKey(int, auto=True)
@@ -48,38 +47,6 @@ username = ""
 password = ""
 
 browser = webdriver.PhantomJS()
-=======
-import pymysql
-import pytz
-
-url = "http://w2.kkkk99.net/"
-login_url = "?r=1"
-main_url = "main.php"
-
-username = ""
-password = ""
-
-browser = webdriver.PhantomJS()
-cnx = pymysql.connect(user='root', database='narnik', charset='utf8')
-cursor = cnx.cursor()
-
-query = ("INSERT INTO narnik.score108_bettingoffer (eventID, eventFK, eventType, eventName, eventTime"
-		"homeResult, awayResult, home_odd, away_odd, under_odd, hdp, ou, active, is_live, n)"
-		"VALUES %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" 
-		"ON DUPLICATE KEY UPDATE active = 'yes';")
-
-query2 = ("INSERT INTO narnik.bettingoffer (eventID, eventFK, eventType, eventName, eventTime" 
-		  "homeResult, awayResult, home_odd, away_odd, under_odd, hdp, ou, active, is_live, n)"
-		  "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
-		  #"ON DUPLICATE KEY UPDATE active = 'yes';"
-		  )
-
-query3 = ("INSERT INTO `bettingoffer` (`id`, `eventID`, `eventFK`, `eventType`, `eventName`, `evevntTime`, `homeResult`, `awayResult`, `home_odd`, `away_odd`, `over_odd`, `under_odd`, `hdp`, `ou`, `active`, `is_live`, `del`, `n`, `ut`)"
-		  "VALUES (1,22039300,1,'SEA Games Malaysia 2017 - Basketball Womens','Myanmar (w)-sv-Philippines (w)','06:38','0','0',0.56,-0.8,NULL,0.6,'79.50','144.50','yes','yes','no',1,'2017-08-22 15:44:05');")
-
-query5 = ("INSERT INTO `bettingoffer` (`id`, `eventID`, `eventFK`, `eventType`, `eventName`, `evevntTime`, `homeResult`, `awayResult`, `home_odd`, `away_odd`, `over_odd`, `under_odd`, `hdp`, `ou`, `active`, `is_live`, `del`, `n`, `ut`)"
-		  "VALUES %s;")
->>>>>>> 5a6ed1a691c56c5ffc58f45a7d837588e0734e16
 
 
 def login():
@@ -214,26 +181,16 @@ def parse_table():
 
 					if firstSecond == 'Live!':
 						eventTime = firstSecond.strip()
-<<<<<<< HEAD
 						eventTime = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
-=======
-						eventTime = datetime.datetime.utcnow().strftime("%H:%M")
->>>>>>> 5a6ed1a691c56c5ffc58f45a7d837588e0734e16
 						live = 'yes'
 
 					elif firstSecond and runningTime:
 						eventTime = datetime.time(
 							int(firstSecond[:-1].strip()),
 							int(runningTime[:-1].strip())
-<<<<<<< HEAD
 							).strftime("%Y-%m-%d %H:%M:%S")
 					else:
 						eventTime = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
-=======
-							).strftime("%H:%M")
-					else:
-						eventTime = datetime.datetime.utcnow().strftime("%H:%M")
->>>>>>> 5a6ed1a691c56c5ffc58f45a7d837588e0734e16
 
 				text_balls = tr.findAll('td', { 'class' : 'text_ball' })
 				if text_balls:
@@ -247,15 +204,9 @@ def parse_table():
 						if hdp:
 							hdp = hdp[0].get_text()
 						if not hdp:
-<<<<<<< HEAD
 							hdp = ''
 					else:
 						hdp = ''
-=======
-							hdp = None
-					else:
-						hdp = None
->>>>>>> 5a6ed1a691c56c5ffc58f45a7d837588e0734e16
 
 					ou = text_balls[1]
 					if ou:
@@ -266,15 +217,9 @@ def parse_table():
 						if ou:
 							ou = ou[0].get_text()
 						if not ou:
-<<<<<<< HEAD
 							ou = ''
 					else: 
 						ou = ''
-=======
-							ou = None
-					else: 
-						ou = None 
->>>>>>> 5a6ed1a691c56c5ffc58f45a7d837588e0734e16
 
 				home_odd_td = tr.select('td[id*=out_my_h__{}__{}__0__1__td]'.format(
 					tr.get('id').split('__')[-3],
@@ -293,19 +238,11 @@ def parse_table():
 							home_odd = home_odd.get_text()
 							
 						if not home_odd:
-<<<<<<< HEAD
 							home_odd = 0
 						else:
 							home_odd = float(home_odd)
 					else: 
 						home_odd = 0 
-=======
-							home_odd = None
-						else:
-							home_odd = float(home_odd)
-					else: 
-						home_odd = None 
->>>>>>> 5a6ed1a691c56c5ffc58f45a7d837588e0734e16
 
 				away_odd_td = tr.select('td[id*=out_my_a__{}__{}__0__1__td]'.format(
 					tr.get('id').split('__')[-3],
@@ -324,19 +261,11 @@ def parse_table():
 							away_odd = away_odd.get_text()
 							
 						if not away_odd:
-<<<<<<< HEAD
 							away_odd = 0
 						else:
 							away_odd = float(away_odd)
 					else: 
 						away_odd = 0
-=======
-							away_odd = None
-						else:
-							away_odd = float(away_odd)
-					else: 
-						away_odd = None 
->>>>>>> 5a6ed1a691c56c5ffc58f45a7d837588e0734e16
 
 				over_odd_td = tr.select('td[id*=out_my_h__{}__{}__0__3__td]'.format(
 					tr.get('id').split('__')[-3],
@@ -355,19 +284,11 @@ def parse_table():
 							over_odd = over_odd.get_text()
 							
 						if not over_odd:
-<<<<<<< HEAD
 							over_odd = 0
 						else:
 							over_odd = float(over_odd)
 					else: 
 						over_odd = 0
-=======
-							over_odd = None
-						else:
-							over_odd = float(over_odd)
-					else: 
-						over_odd = None 
->>>>>>> 5a6ed1a691c56c5ffc58f45a7d837588e0734e16
 
 				under_odd_td = tr.select('td[id*=out_my_a__{}__{}__0__3__td]'.format(
 					tr.get('id').split('__')[-3],
@@ -386,7 +307,6 @@ def parse_table():
 							under_odd = under_odd.get_text()
 
 						if not under_odd:
-<<<<<<< HEAD
 							under_odd = 0
 						else:
 							under_odd = float(under_odd)
@@ -434,29 +354,6 @@ def parse_table():
 							ut=datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
 							)
 					commit()
-=======
-							under_odd = None
-						else:
-							under_odd = float(under_odd)
-					else: 
-						under_odd = None 
-
-				params = (
-					eventID, 1, eventType, eventName, eventTime, homeResult, awayResult, 
-					home_odd, away_odd, under_odd, hdp, ou, 'yes', live, 'no', 1, '2017-08-22 15:44:05'
-					)
-				print(params)
-				query5 = ("INSERT INTO `bettingoffer` (`eventID`, `eventFK`, `eventType`, `eventName`, `evevntTime`, `homeResult`"
-										"`awayResult`, `home_odd`, `away_odd`, `over_odd`, `under_odd`, `hdp`, `ou`, `active`" 
-										"`is_live`, `del`, `n`, `ut`"
-						  #"VALUES %s" % params)
-						  "VALUES ({0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}', '{16}')".format(
-						  	eventID, 1, eventType, eventName, eventTime, homeResult, awayResult, 
-							home_odd, away_odd, under_odd, hdp, ou, 'yes', live, 'no', 1, '2017-08-22 15:44:05'
-						  	))
-				cursor.execute(query5)
-
->>>>>>> 5a6ed1a691c56c5ffc58f45a7d837588e0734e16
 
 
 def main():
@@ -476,10 +373,6 @@ def main():
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
 	pidfile='/tmp/%s' % 'bet_parser'
-	daemon = Daemonize(app='bet_parser', pid=pidfile, action=main)
+	daemon = Daemonize(app=myname,pid=pidfile, action=main)
 	daemon.start()
-=======
-	main()
->>>>>>> 5a6ed1a691c56c5ffc58f45a7d837588e0734e16
