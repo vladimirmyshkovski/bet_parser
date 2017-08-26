@@ -38,10 +38,10 @@ class Bettingoffer(db.Entity):
 db.generate_mapping(create_tables=True)
 
 
-url = "http://w2.kkkk99.net/"
+url = ""
 
-login_url = "?r=1"
-main_url = "main.php"
+login_url = ""
+main_url = ""
 
 username = ""
 password = ""
