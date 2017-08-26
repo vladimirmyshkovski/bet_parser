@@ -8,6 +8,7 @@ import os
 import time
 import pytz
 from pony.orm import *
+from daemonize import Daemonize
 
 
 db = Database()
@@ -372,4 +373,6 @@ def main():
 
 
 if __name__ == '__main__':
-	main()
+	pidfile='/tmp/%s' % 'bet_parser'
+	daemon = Daemonize(app='bet_parser',pid=pidfile, action=main)
+	daemon.start()
