@@ -43,8 +43,8 @@ url = "http://w2.kkkk99.net/"
 login_url = "?r=1"
 main_url = "main.php"
 
-username = ""
-password = ""
+username = "x660s1573"
+password = "aa123456"
 
 browser = webdriver.PhantomJS()
 
@@ -59,26 +59,6 @@ def login():
 
 	browser.find_element_by_xpath('//input[@id="txtUsername"]').send_keys(username)
 	browser.find_element_by_xpath('//input[@id="txtPassword"]').send_keys(password)
-
-	button.click()
-
-
-def get_security_code():
-
-	frame = WebDriverWait(browser, 10).until(
-		EC.presence_of_element_located((By.XPATH, "//iframe[@id='main']"))
-	)
-
-	browser.switch_to.frame('main')
-	form = WebDriverWait(browser, 10).until(
-		EC.presence_of_element_located((By.XPATH, "//form[@id='form1']"))
-	)
-
-	security_code_input = browser.find_element_by_xpath('//input[@id="txtNewPwd1"]')
-	if security_code_input:
-		print(security_code_input)
-		security_code_input.send_keys(security_code)
-	button = browser.find_element_by_xpath('//button[@id="btnSubmit"]') 
 
 	button.click()
 
@@ -185,10 +165,13 @@ def parse_table():
 						live = 'yes'
 
 					elif firstSecond and runningTime:
-						eventTime = datetime.time(
-							int(firstSecond[:-1].strip()),
-							int(runningTime[:-1].strip())
-							).strftime("%Y-%m-%d %H:%M:%S")
+						if firstSecond[:-1].strip() and runningTime[:-1].strip():
+							eventTime = datetime.time(
+								int(firstSecond[:-1].strip()),
+								int(runningTime[:-1].strip())
+								).strftime("%Y-%m-%d %H:%M:%S")
+						else:
+							datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")	
 					else:
 						eventTime = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
 
