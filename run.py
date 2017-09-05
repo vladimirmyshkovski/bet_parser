@@ -45,7 +45,7 @@ main_url = "main.php"
 username = "x660s1573"
 password = "aa123456"
 
-browser = webdriver.Firefox()#PhantomJS()
+browser = webdriver.PhantomJS()
 
 
 def login():
