@@ -43,8 +43,8 @@ url = "http://w2.kkkk99.net/"
 login_url = "?r=1"
 main_url = "main.php"
 
-username = "x660s1573"
-password = "aa123456"
+username = ""
+password = ""
 
 browser = webdriver.PhantomJS()
 
