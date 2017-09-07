@@ -224,7 +224,9 @@ def parse_table():
 						else:
 							home_odd = float(home_odd)
 					else: 
-						home_odd = 0 
+						home_odd = 0
+				else:
+					home_odd = 0
 
 				away_odd_td = tr.select('td[id*=out_my_a__{}__{}__0__1__td]'.format(
 					tr.get('id').split('__')[-3],
@@ -248,7 +250,9 @@ def parse_table():
 							away_odd = float(away_odd)
 					else: 
 						away_odd = 0
-
+				else:
+					away_odd = 0
+					
 				over_odd_td = tr.select('td[id*=out_my_h__{}__{}__0__3__td]'.format(
 					tr.get('id').split('__')[-3],
 					tr.get('id').split('__')[-2])
